@@ -34,4 +34,11 @@ public class ProjectService {
 			throw new DbException("Project with ID=" + project.getProjectId() + " does not exist.");//operation was successfull.
 		}//checks return value  and if false throws DbException saying project doesnt exist
 	}
+
+	public void deleteProject(Integer projectId) {
+		if(!projectDao.deleteProject(projectId)) {//calls deleteProject from projectDao,
+			//checks the boolean value, if false, am exception is thrown stating message below
+			throw new DbException("Project with ID= " + projectId + " does not exist." );
+		}
+	}
 }

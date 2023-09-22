@@ -18,7 +18,8 @@ public class ProjectApp {
 			"1) Add a project",
 			"2) List projects",
 			"3) Select a project",
-			"4) Update project details"
+			"4) Update project details",
+			"5) Delete a project"
 			);
 	//@formatter:on
 
@@ -55,6 +56,10 @@ public class ProjectApp {
 				case 4:
 					updateProjectDetails();
 					break;
+					
+				case 5:
+					deleteProject();
+					break;
 
 				default:
 					System.out.println("\nError " + selection + " Try again.");
@@ -67,6 +72,25 @@ public class ProjectApp {
 			}
 		}
 	}
+
+private void deleteProject() {
+	listProjects(); //calls listProjects() to this method
+	
+	Integer projectId = getIntInput("Enter a project ID to delete");//asks user to select project
+	
+	
+	/*
+	 * this block of code checks to see if curProject is the same as ID enter by the user
+	 * if it is, it sets value of curProject to null
+	 */
+	projectService.deleteProject(projectId);
+		System.out.println("Project " + projectId + " was deleted successfully.");
+		
+		if(Objects.nonNull(curProject) && curProject.getProjectId().equals(projectId)) {
+			curProject = null;
+		}
+	}
+	
 
 private void updateProjectDetails() {//allows user to update project details
 	if(Objects.isNull(curProject)) {//checks to see if curProject is null
